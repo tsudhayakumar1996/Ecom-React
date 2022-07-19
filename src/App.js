@@ -15,6 +15,7 @@ import Loader from './comoonents/loader';
 function App() {
 
   useEffect(() => {
+    console.log("inside the data fetching...")
     fetchProduct();
   }, [])
 

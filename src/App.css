@@ -101,6 +101,12 @@
   flex: 0 0 100%;
   max-width: 100%;
 }
+.flex-column{
+  flex-direction: column;
+}
+.flex-row{
+  flex-direction: row;
+}
 .d-flex{
   display: flex!important;
 }
@@ -479,8 +485,7 @@
 /***** navbar.js *****/
 
 .nav-bar{
-  padding: 10px 0px;
-  box-shadow: 0px 0px 1px lightgray;
+  padding: 10px 0px;  
   position: fixed;
   top: 0px;
   width: 1275px;  
@@ -577,6 +582,23 @@
 .search-box::-moz-placeholder {
   font-family: 'Comfortaa';
 }
+.cross-rotation{
+  animation: crossrotation 0.8s linear;
+}
+@keyframes crossrotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(45deg);    
+  }
+  75% {
+    transform: rotate(-45deg);    
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
 
 /***** loader *****/
 
@@ -620,5 +642,27 @@
 }
 .cart-animation{
   transition: transform .2s;
+}
+
+/***** particular product *****/
+
+.active-img{
+  box-shadow: 0px 0px 1px lightgray;
+  transition: box-shadow .2s;
+  cursor: pointer;
+}
+.cur-active-img{
+  box-shadow: 0px 0px 20px lightgray;
+  transition: box-shadow .2s;
+  cursor: pointer;
+}
+.cur-active-img:hover{
+  box-shadow: 0px 0px 20px lightgray;
+  transition: box-shadow .2s;
+  cursor: pointer;
+}
+.active-img:hover{
+  box-shadow: 0px 0px 20px lightgray;
+  transition: box-shadow .2s;
 }
 
