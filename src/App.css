@@ -131,6 +131,9 @@
 .justify-content-evenly{
   justify-content: space-evenly!important;
 }
+.justify-content-center{
+  justify-content: center!important;
+}
 .align-items-center{
   align-items: center!important;
 }
@@ -166,6 +169,25 @@
 }
 .w-75{
   width: 75%;
+}
+.btn-common{
+  border: none;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  font-family: "Comfortaa-light";
+  display: flex;
+  cursor: pointer;
+}
+.btn-arrow-right{
+  transition: padding 0.2s;
+}
+.btn-common:hover .btn-arrow-right{
+  padding-left: 20px!important;
+  transition: padding 0.2s;
+}
+.btn-common:hover {
+  box-shadow: 0px 0px 5px lightgray!important;
 }
 
 /***** media query *****/
@@ -664,5 +686,9 @@
 .active-img:hover{
   box-shadow: 0px 0px 20px lightgray;
   transition: box-shadow .2s;
+}
+.img-selector-position{
+  top: 50%;
+  transform: translateY(-50%);
 }
 

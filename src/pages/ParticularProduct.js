@@ -28,7 +28,7 @@ export default function ParticularProduct () {
               <div style={{width:600,height:600,margin:'auto'}} className='pos-rel'>
                 <img className='w-100 showing-image' src={ApiLists.baseURL+"/"+activeImage} alt='Product...'/>
               </div>
-              <div className='pos-abs d-flex align-items-center flex-column' style={{top:0}}>
+              <div className='pos-abs d-flex align-items-center flex-column img-selector-position'>
                 {productDetails.other_images.map((product,idx)=>{
                   return(
                     <img style={{width:150,height:150}} onClick={()=>imgChangeHandler(product)} className={activeImage === product ?'cur-active-img' : 'active-img'} key={idx} src={ApiLists.baseURL+"/"+product} alt="Loading..."/>   
@@ -36,8 +36,13 @@ export default function ParticularProduct () {
                 })}
               </div>
             </div>
-            <div className='col-lg-4 no-padding'>
-              
+            <div className='col-lg-4 no-padding d-flex justify-content-center flex-column'>
+              <div className='d-flex align-items-center justify-content-between'>
+                <h1>{productDetails.title}</h1>
+                <h1>{"("+productDetails.price+")"}</h1>
+              </div>
+              <p style={{marginTop:20}}>{productDetails.description}</p>
+              <button className='btn-common' style={{width:120,marginTop:20}}>Add Cart<i class="fa-solid fa-arrow-right btn-arrow-right" style={{paddingLeft:10}}></i></button>
             </div>
           </div>
       </div>
