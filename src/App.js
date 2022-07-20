@@ -11,11 +11,13 @@ import ParticularProduct from './pages/ParticularProduct';
 import User from './pages/User';
 import CartList from './pages/CartList';
 import Loader from './comoonents/loader';
+import React from 'react';
 
 function App() {
 
-  useEffect(() => {
-    console.log("inside the data fetching...")
+  const TopContext = React.createContext()
+
+  useEffect(() => {    
     fetchProduct();
   }, [])
 
@@ -29,33 +31,36 @@ function App() {
   const loggedIn = true;
 
   return (
-    <div className='app_container'>  
-      {products ?  
-        <>    
-          <NavBar productLists={products}/>     
-          <div style={{padding:80}}>
-            <Routes>
-              {loggedIn ?
-                <>            
-                  <Route path='/' element={<Home productLists={products} />}></Route>
-                  <Route path='particular_product' element={<ParticularProduct />}></Route>
-                  <Route path='cart_list' element={<CartList />}></Route>
-                  <Route path='user' element={<User />}></Route>
-                  <Route path='*' element={<NoMatch />}></Route>
-                </> : 
-                <>
-                  <Route path='/' element={<Home />}></Route>
-                  <Route path='particular_product' element={<ParticularProduct />}></Route>
-                  <Route path='login' element={<Login />}></Route>
-                  <Route path='*' element={<NoMatch />}></Route>
-                </>
-              }                
-            </Routes>
-          </div>   
-        </> :
-        <Loader />
-      }                
-    </div>
+    
+      <div className='app_container'>  
+        {products ?  
+          <TopContext.Provider value={{loggedIn,products}}>
+            <>  
+              <NavBar productLists={products}/>     
+              <div style={{padding:80}}>
+                <Routes>
+                  {loggedIn ?
+                    <>            
+                      <Route path='/' element={<Home productLists={products} />}></Route>
+                      <Route path='particular_product' element={<ParticularProduct />}></Route>
+                      <Route path='cart_list' element={<CartList />}></Route>
+                      <Route path='user' element={<User />}></Route>
+                      <Route path='*' element={<NoMatch />}></Route>
+                    </> : 
+                    <>
+                      <Route path='/' element={<Home />}></Route>
+                      <Route path='particular_product' element={<ParticularProduct />}></Route>
+                      <Route path='login' element={<Login />}></Route>
+                      <Route path='*' element={<NoMatch />}></Route>
+                    </>
+                  }                
+                </Routes>
+              </div>   
+            </>
+          </TopContext.Provider> :
+          <Loader />
+        }                
+      </div>    
   );
 }
 

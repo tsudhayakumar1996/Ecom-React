@@ -5,7 +5,6 @@ import { ApiLists } from '../api'
 export default function ParticularProduct () {  
   
   const location = useLocation()
-  console.log(location.state.product,"<=========location") 
   const particularProduct = location.state.product
   
   const [productDetails, setproductDetails] = useState(null)
@@ -31,7 +30,7 @@ export default function ParticularProduct () {
               <div className='pos-abs d-flex align-items-center flex-column img-selector-position'>
                 {productDetails.other_images.map((product,idx)=>{
                   return(
-                    <img style={{width:150,height:150}} onClick={()=>imgChangeHandler(product)} className={activeImage === product ?'cur-active-img' : 'active-img'} key={idx} src={ApiLists.baseURL+"/"+product} alt="Loading..."/>   
+                    <img style={{width:125,height:125}} onClick={()=>imgChangeHandler(product)} className={activeImage === product ?'cur-active-img' : 'active-img'} key={idx} src={ApiLists.baseURL+"/"+product} alt="Loading..."/>   
                   )                                
                 })}
               </div>
@@ -42,8 +41,11 @@ export default function ParticularProduct () {
                 <h1>{"("+productDetails.price+")"}</h1>
               </div>
               <p style={{marginTop:20}}>{productDetails.description}</p>
-              <button className='btn-common' style={{width:120,marginTop:20}}>Add Cart<i class="fa-solid fa-arrow-right btn-arrow-right" style={{paddingLeft:10}}></i></button>
+              <button className='btn-common' style={{width:130,marginTop:20}}>Add Cart<i className="fa-solid fa-arrow-right btn-arrow-right" style={{paddingLeft:10}}></i></button>
             </div>
+          </div>
+          <div>
+            
           </div>
       </div>
     )
