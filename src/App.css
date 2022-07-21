@@ -501,7 +501,7 @@
 /***** app.js *****/
 
 .app_container{
-  width: 1275px;
+  width: 1280px;
   margin: 0px auto;
   position: relative;  
 }
@@ -512,7 +512,7 @@
   padding: 10px 0px;  
   position: fixed;
   top: 0px;
-  width: 1275px;  
+  width: 1280px;  
   z-index: 1;  
   backdrop-filter: saturate(180%) blur(10px);
 }
@@ -692,5 +692,13 @@
 .img-selector-position{
   top: 50%;
   transform: translateY(-50%);
+}
+.carousal-box{
+  width: 1120px;    
+}
+.carousal-inner{
+  width: 100%;
+  white-space: nowrap;
+  overflow: scroll;    
 }
 

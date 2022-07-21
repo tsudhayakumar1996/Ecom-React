@@ -13,9 +13,9 @@ import CartList from './pages/CartList';
 import Loader from './comoonents/loader';
 import React from 'react';
 
-function App() {
+export const TopContext = React.createContext()
 
-  const TopContext = React.createContext()
+function App() {  
 
   useEffect(() => {    
     fetchProduct();

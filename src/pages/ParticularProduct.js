@@ -1,8 +1,13 @@
 import React,{useState,useEffect} from 'react'
 import { useLocation } from 'react-router-dom'
 import { ApiLists } from '../api'
+import { useContext } from 'react'
+import { TopContext } from '../App'
 
 export default function ParticularProduct () {  
+
+  const contextVal = useContext(TopContext)  
+  const productLists = contextVal.products  
   
   const location = useLocation()
   const particularProduct = location.state.product
@@ -12,14 +17,40 @@ export default function ParticularProduct () {
 
   useEffect(() => {
     setproductDetails(particularProduct)
-    setactiveImage(particularProduct.product_image)
+    setactiveImage(particularProduct.product_image)    
   }, [setproductDetails,particularProduct])      
 
   const imgChangeHandler = (image) => {
     setactiveImage(image)
+  }   
+  
+  window.onscroll = function() {
+    horizontalScroll()
   }
 
-  if(productDetails){
+  var lastScrollTop = 0;
+
+  function horizontalScroll (where=null) {
+    const carousal = document.getElementById('carousal-item-box')
+    if(where){
+      if(where === "toleft"){
+        carousal.scrollTo({left:(productLists.length)*325,behavior:'smooth'})
+      }else{
+        carousal.scrollTo({left:0,behavior:'smooth'})
+      }
+    }else{
+      let currentY = window.pageYOffset        
+      if(currentY > lastScrollTop){      
+        carousal.scrollBy(20,0)
+      }else{      
+        carousal.scrollTo({left:0,behavior:'smooth'})
+      }
+      lastScrollTop = currentY <= 0 ? 0 : currentY  
+    }      
+  }
+
+  if(productDetails){    
+
     return (
       <div>
           <div className='row no-margin'>
@@ -44,8 +75,20 @@ export default function ParticularProduct () {
               <button className='btn-common' style={{width:130,marginTop:20}}>Add Cart<i className="fa-solid fa-arrow-right btn-arrow-right" style={{paddingLeft:10}}></i></button>
             </div>
           </div>
+          {/* <button onClick={() => horizontalScroll()}>click to scroll</button> */}
+          <div className='carousal-box'>
+            <div className='carousal-inner d-flex align-items-center' id='carousal-item-box'>
+              <i className="fa-solid fa-caret-right" onClick={()=>horizontalScroll('toleft')} style={{fontSize:50,cursor:'pointer',zIndex:1}}></i> 
+              {productLists.map((product,idx)=>{
+                return(
+                  <img key={idx} src={ApiLists.baseURL+"/"+product.product_image} className='img-hover-animate' alt="Loading..." style={{width:325,height:325,zIndex:0}}/>
+                )
+              })} 
+              <i className="fa-solid fa-caret-left" onClick={()=>horizontalScroll('toright')} style={{fontSize:50,cursor:'pointer',zIndex:1}}></i>            
+            </div>
+          </div>
           <div>
-            
+
           </div>
       </div>
     )
