@@ -7,7 +7,7 @@ import { TopContext } from '../App'
 export default function ParticularProduct () {  
 
   const contextVal = useContext(TopContext)  
-  const productLists = contextVal.products  
+  const productLists = contextVal.contextVal.products  
   
   const location = useLocation()
   const particularProduct = location.state.product
@@ -24,7 +24,7 @@ export default function ParticularProduct () {
     setactiveImage(image)
   }   
   
-  window.onscroll = function() {
+  window.onscroll = function() {    
     horizontalScroll()
   }
 
@@ -81,7 +81,7 @@ export default function ParticularProduct () {
               <i className="fa-solid fa-caret-right" onClick={()=>horizontalScroll('toleft')} style={{fontSize:50,cursor:'pointer',zIndex:1}}></i> 
               {productLists.map((product,idx)=>{
                 return(
-                  <img key={idx} src={ApiLists.baseURL+"/"+product.product_image} className='img-hover-animate' alt="Loading..." style={{width:325,height:325,zIndex:0}}/>
+                  <img key={idx} src={ApiLists.baseURL+"/"+product.product_image} className='img-hover-animate-scale-down' alt="Loading..." style={{width:325,height:325,zIndex:0,cursor:'pointer'}}/>
                 )
               })} 
               <i className="fa-solid fa-caret-left" onClick={()=>horizontalScroll('toright')} style={{fontSize:50,cursor:'pointer',zIndex:1}}></i>            

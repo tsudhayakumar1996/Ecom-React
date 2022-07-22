@@ -21,27 +21,31 @@ function App() {
     fetchProduct();
   }, [])
 
-  const [products, setProducts] = useState(null)
+  const [contextVal, setcontextVal] = useState({
+    products:null,
+    loggedIn:true,
+    scrollToTop:false
+  })
 
   const fetchProduct = async () => {
     const products = await FetchGet(ApiLists.baseURL+'/product')    
-    setProducts(products)
+    setcontextVal({
+      products:products,            
+    })
   }
-
-  const loggedIn = true;
 
   return (
     
-      <div className='app_container'>  
-        {products ?  
-          <TopContext.Provider value={{loggedIn,products}}>
+      <div className='app_container'>        
+        {contextVal.products ?  
+          <TopContext.Provider value={{contextVal,setcontextVal}}>
             <>  
-              <NavBar productLists={products}/>     
+              <NavBar />     
               <div style={{padding:80}}>
                 <Routes>
-                  {loggedIn ?
+                  {contextVal.loggedIn ?
                     <>            
-                      <Route path='/' element={<Home productLists={products} />}></Route>
+                      <Route path='/' element={<Home />}></Route>
                       <Route path='particular_product' element={<ParticularProduct />}></Route>
                       <Route path='cart_list' element={<CartList />}></Route>
                       <Route path='user' element={<User />}></Route>

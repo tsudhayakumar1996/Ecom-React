@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ApiLists } from '../api'
 import { useNavigate } from 'react-router-dom'
+import { TopContext } from '../App'
 
-export default function Home ({productLists}) {  
+export default function Home () {  
   
+  const {contextVal} = useContext(TopContext)
+  console.log(contextVal,"from home pages")
   const navigate = useNavigate()
   const imgClickHandler = (product) => {    
     navigate('particular_product',{state:{product}})
@@ -11,7 +14,7 @@ export default function Home ({productLists}) {
 
   return (
     <div className='row no-margin'>
-      {productLists.map((product,i) => {
+      {contextVal.products.map((product,i) => {
         return(
           <div className='col-md-6' key={i}>  
             <div className='d-flex justify-content-between'>            
