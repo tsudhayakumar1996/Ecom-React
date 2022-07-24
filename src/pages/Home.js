@@ -5,16 +5,16 @@ import { TopContext } from '../App'
 
 export default function Home () {  
   
-  const {contextVal} = useContext(TopContext)
-  console.log(contextVal,"from home pages")
+  const {products,setscrollToTop} = useContext(TopContext)
   const navigate = useNavigate()
-  const imgClickHandler = (product) => {    
+  const imgClickHandler = (product) => {
+    setscrollToTop(false)    
     navigate('particular_product',{state:{product}})
   }
 
   return (
     <div className='row no-margin'>
-      {contextVal.products.map((product,i) => {
+      {products.map((product,i) => {
         return(
           <div className='col-md-6' key={i}>  
             <div className='d-flex justify-content-between'>            

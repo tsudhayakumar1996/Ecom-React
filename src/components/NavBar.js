@@ -5,7 +5,7 @@ import { TopContext } from '../App'
 
 export default function NavBar() {
 
-  const contextVal = useContext(TopContext)
+  const {products,scrollToTop,setscrollToTop} = useContext(TopContext)
   const navigate = useNavigate()
   const [searchBox, setsearchBox] = useState(false)
   const [filteredProducts, setfilteredProducts] = useState([])  
@@ -14,19 +14,15 @@ export default function NavBar() {
   window.onscroll = function() {    
     var distanceScrolled = document.documentElement.scrollTop;    
     if(distanceScrolled > viewPortHeight){  
-      contextVal.setcontextVal({
-        scrollToTop:true
-      });
+      setscrollToTop(true)
     }else{
-      contextVal.setcontextVal({
-        scrollToTop:true
-      });
+      setscrollToTop(false)
     }  
   }  
 
   const productSearchHandler = (searchKey) => {  
     if(searchKey !== ""){ 
-      const filtering = contextVal.contextVal.products.filter(product => product.title.toLowerCase().includes(searchKey.toLowerCase()))  
+      const filtering = products.filter(product => product.title.toLowerCase().includes(searchKey.toLowerCase()))  
       setfilteredProducts(filtering)      
       setsearchBox(true)
     }else{
@@ -40,8 +36,7 @@ export default function NavBar() {
   }
 
   const scrollToTopHandler = () => {
-    console.log("inside the icon click")
-    if(contextVal.contextVal["scrollToTop"]){
+    if(scrollToTop){
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -55,7 +50,7 @@ export default function NavBar() {
       <div className='row no-margin'>
         <div className='col-lg-6' style={{paddingRight:0}}>          
           <div className='d-flex justify-content-between align-items-center'>
-            <img src='./images/icon-4.png' className={contextVal.contextVal["scrollToTop"] ? 'scroll-to-top' : ""} onClick={()=>scrollToTopHandler()} style={{width:60,height:60}} alt='Brand'/>
+            <img src='./images/icon-4.png' className={scrollToTop ? 'scroll-to-top' : ""} onClick={()=>scrollToTopHandler()} style={{width:60,height:60}} alt='Brand'/>
             <div className='pos-rel'>
               <input placeholder={'Search The Product Here'} onChange={(e)=>productSearchHandler(e.target.value)} className='search-box'/>
               <i className="fa-solid fa-magnifying-glass pos-abs" style={{top:12,right:12}}></i>
